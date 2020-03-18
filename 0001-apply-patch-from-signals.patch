@@ -1,0 +1,25 @@
+From 47bc734a7a300921ab3bc9679045fcf53a17db16 Mon Sep 17 00:00:00 2001
+From: savoptik <sav70792@gmail.com>
+Date: Wed, 18 Mar 2020 16:39:38 +0300
+Subject: [PATCH] apply patch from signals
+
+---
+ lldb/tools/debugserver/source/MacOSX/MachTask.mm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lldb/tools/debugserver/source/MacOSX/MachTask.mm b/lldb/tools/debugserver/source/MacOSX/MachTask.mm
+index 5d18c5628c6..8d920bf6551 100644
+--- a/lldb/tools/debugserver/source/MacOSX/MachTask.mm
++++ b/lldb/tools/debugserver/source/MacOSX/MachTask.mm
+@@ -612,7 +612,7 @@ static void get_threads_profile_data(DNBProfileDataScanType scanType,
+ 
+     // Set the ability to get all exceptions on this port
+     err = ::task_set_exception_ports(
+-        task, m_exc_port_info.mask, m_exception_port,
++        task, m_exc_port_info.mask & ~EXC_MASK_BAD_ACCESS, m_exception_port,
+         EXCEPTION_DEFAULT | MACH_EXCEPTION_CODES, THREAD_STATE_NONE);
+     if (DNBLogCheckLogBit(LOG_EXCEPTIONS) || err.Fail()) {
+       err.LogThreaded("::task_set_exception_ports ( task = 0x%4.4x, "
+-- 
+2.21.1 (Apple Git-122.3)
+

@@ -10,8 +10,6 @@
 if [ ! -f ./llvm-project/README.md ];
 then
 git submodule update --init --recursive
-#git submodule init
-#git submodule update
 fi
 
 # проверка установки патча
